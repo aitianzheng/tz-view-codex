@@ -205,10 +205,7 @@ export default function Home() {
                 <span>扫码添加我为微信好友</span>
               </div>
               <div className="wechat-qr">
-                <img src="/wechat-tianzheng.jpg" width="888" height="1131" alt="天正的微信二维码" />
-                <a className="button primary" href="/wechat-tianzheng.jpg" download="天正-微信二维码.jpg">
-                  保存二维码
-                </a>
+                <img src="/wechat-tianzheng.png" width="354" height="358" alt="天正的微信二维码" />
               </div>
             </div>
           </div>

@@ -151,9 +151,8 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--cream); outline
 .wechat-card p { margin: 0; color: var(--gold); font-size: 10px; letter-spacing: .15em; }
 .wechat-card h3 { margin: 5px 0; font-family: Georgia, serif; font-size: clamp(32px, 4vw, 58px); }
 .wechat-copy > span:last-child { color: var(--muted); font-size: 13px; }
-.wechat-qr { display: grid; gap: 14px; justify-items: stretch; width: 260px; }
+.wechat-qr { display: grid; justify-items: stretch; width: 260px; }
 .wechat-qr > img { display: block; width: 260px; height: auto; border-radius: 8px; background: #fff; }
-.wechat-qr .button { width: 100%; }
 
 .site-footer { display: flex; justify-content: space-between; align-items: center; gap: 20px; min-height: 110px; color: rgba(244, 238, 219, .46); font-size: 11px; letter-spacing: .08em; }
 .site-footer div { display: flex; gap: 22px; }
