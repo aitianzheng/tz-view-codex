@@ -10,7 +10,7 @@ const profile = {
   intro: '独立创作者与 AI 实践者。记录产品、内容与自动化从想法走向落地的全过程。',
   identity: 'BUILDER · CREATOR · EXPLORER',
   email: 'aitianzheng@gmail.com',
-  wechat: 'your_wechat',
+  wechatName: '天正',
   x: 'https://x.com/ai_tianzheng',
   xHandle: '@ai_tianzheng',
   telegram: 'https://t.me/ai_tianzheng',
@@ -42,7 +42,6 @@ const services = [
 
 export default function Home() {
   const [activeSection, setActiveSection] = useState('home');
-  const [copied, setCopied] = useState(false);
 
   useEffect(() => {
     const sections = navItems
@@ -60,12 +59,6 @@ export default function Home() {
     sections.forEach((section) => observer.observe(section));
     return () => observer.disconnect();
   }, []);
-
-  const copyWechat = async () => {
-    await navigator.clipboard.writeText(profile.wechat);
-    setCopied(true);
-    window.setTimeout(() => setCopied(false), 1800);
-  };
 
   return (
     <main>
@@ -205,15 +198,18 @@ export default function Home() {
               </a>
             </div>
             <div className="wechat-card">
-              <div>
+              <div className="wechat-copy">
                 <img className="contact-logo" src="/icons/wechat.svg" width="52" height="52" alt="" aria-hidden="true" />
                 <p>WECHAT</p>
-                <h3>{profile.wechat}</h3>
-                <span>点击按钮复制微信号</span>
+                <h3>{profile.wechatName}</h3>
+                <span>扫码添加我为微信好友</span>
               </div>
-              <button className="button primary" type="button" onClick={copyWechat}>
-                {copied ? '已复制' : '复制微信号'}
-              </button>
+              <div className="wechat-qr">
+                <img src="/wechat-tianzheng.jpg" width="888" height="1131" alt="天正的微信二维码" />
+                <a className="button primary" href="/wechat-tianzheng.jpg" download="天正-微信二维码.jpg">
+                  保存二维码
+                </a>
+              </div>
             </div>
           </div>
         </div>
