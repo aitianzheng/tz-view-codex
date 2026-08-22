@@ -9,10 +9,12 @@ const profile = {
   headline: '把想法变成\n真实作品',
   intro: '独立创作者与 AI 实践者。记录产品、内容与自动化从想法走向落地的全过程。',
   identity: 'BUILDER · CREATOR · EXPLORER',
-  email: 'hello@your-domain.com',
+  email: 'aitianzheng@gmail.com',
   wechat: 'your_wechat',
-  x: 'https://x.com/yourname',
-  telegram: 'https://t.me/yourname',
+  x: 'https://x.com/ai_tianzheng',
+  xHandle: '@ai_tianzheng',
+  telegram: 'https://t.me/ai_tianzheng',
+  telegramHandle: '@ai_tianzheng',
   github: 'https://github.com/yourname',
 };
 
@@ -193,12 +195,12 @@ export default function Home() {
               </a>
               <a className="contact-card" href={profile.x} target="_blank" rel="noreferrer">
                 <img className="contact-logo contact-logo-x" src="/icons/x.svg" width="46" height="46" alt="" aria-hidden="true" />
-                <span><strong>X</strong><em>@yourname</em></span>
+                <span><strong>X</strong><em>{profile.xHandle}</em></span>
                 <span className="contact-go">↗</span>
               </a>
               <a className="contact-card" href={profile.telegram} target="_blank" rel="noreferrer">
                 <img className="contact-logo" src="/icons/telegram.svg" width="46" height="46" alt="" aria-hidden="true" />
-                <span><strong>Telegram</strong><em>@yourname</em></span>
+                <span><strong>Telegram</strong><em>{profile.telegramHandle}</em></span>
                 <span className="contact-go">↗</span>
               </a>
             </div>
