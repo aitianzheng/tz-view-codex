@@ -12,6 +12,7 @@ const profile = {
   email: 'hello@your-domain.com',
   wechat: 'your_wechat',
   x: 'https://x.com/yourname',
+  telegram: 'https://t.me/yourname',
   github: 'https://github.com/yourname',
 };
 
@@ -186,24 +187,24 @@ export default function Home() {
           <div className="contact-board">
             <div className="contact-links">
               <a className="contact-card" href={`mailto:${profile.email}`}>
-                <span className="contact-icon">@</span>
-                <span><strong>Email</strong><em>{profile.email}</em></span>
+                <img className="contact-logo contact-logo-gmail" src="/icons/gmail.svg" width="46" height="46" alt="" aria-hidden="true" />
+                <span><strong>Gmail</strong><em>{profile.email}</em></span>
                 <span className="contact-go">↗</span>
               </a>
               <a className="contact-card" href={profile.x} target="_blank" rel="noreferrer">
-                <span className="contact-icon">X</span>
-                <span><strong>X / Twitter</strong><em>@yourname</em></span>
+                <img className="contact-logo contact-logo-x" src="/icons/x.svg" width="46" height="46" alt="" aria-hidden="true" />
+                <span><strong>X</strong><em>@yourname</em></span>
                 <span className="contact-go">↗</span>
               </a>
-              <a className="contact-card" href={profile.github} target="_blank" rel="noreferrer">
-                <span className="contact-icon">GH</span>
-                <span><strong>GitHub</strong><em>github.com/yourname</em></span>
+              <a className="contact-card" href={profile.telegram} target="_blank" rel="noreferrer">
+                <img className="contact-logo" src="/icons/telegram.svg" width="46" height="46" alt="" aria-hidden="true" />
+                <span><strong>Telegram</strong><em>@yourname</em></span>
                 <span className="contact-go">↗</span>
               </a>
             </div>
             <div className="wechat-card">
               <div>
-                <span className="contact-icon">微</span>
+                <img className="contact-logo" src="/icons/wechat.svg" width="52" height="52" alt="" aria-hidden="true" />
                 <p>WECHAT</p>
                 <h3>{profile.wechat}</h3>
                 <span>点击按钮复制微信号</span>
