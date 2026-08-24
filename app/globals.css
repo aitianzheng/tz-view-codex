@@ -14,6 +14,7 @@
 }
 
 * { box-sizing: border-box; }
+::selection { color: #070603; background: var(--gold); }
 html { scroll-behavior: smooth; scroll-padding-top: 78px; }
 body {
   margin: 0;
@@ -78,6 +79,11 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--cream); outline
 .hero-lede { max-width: 690px; margin: 34px 0 0; font-size: clamp(19px, 1.65vw, 27px); font-weight: 650; line-height: 1.55; }
 .identity-line { margin: 26px 0 0; color: var(--gold); font-size: 12px; letter-spacing: .12em; }
 .hero-actions { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 34px; }
+.hero-signals { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); max-width: 620px; margin-top: 44px; border: 1px solid var(--line); background: rgba(5, 5, 5, .42); }
+.hero-signals div { display: grid; gap: 8px; min-height: 78px; padding: 17px 20px; }
+.hero-signals div + div { border-left: 1px solid var(--line); }
+.hero-signals span { color: rgba(244, 238, 219, .35); font-family: Georgia, serif; font-size: 11px; }
+.hero-signals strong { color: rgba(244, 238, 219, .84); font-family: Georgia, "Songti SC", serif; font-size: 16px; }
 .button { display: inline-grid; place-items: center; min-height: 48px; padding: 0 25px; border: 1px solid var(--line-strong); border-radius: 5px; font-size: 14px; font-weight: 700; transition: transform .2s var(--ease), background .2s var(--ease); }
 .button:hover { transform: translateY(-2px); }
 .button.primary { color: #0a0906; background: var(--gold); border-color: var(--gold); }
@@ -152,7 +158,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--cream); outline
 .wechat-card h3 { margin: 5px 0; font-family: Georgia, serif; font-size: clamp(32px, 4vw, 58px); }
 .wechat-copy > span:last-child { color: var(--muted); font-size: 13px; }
 .wechat-qr { display: grid; justify-items: stretch; width: 260px; }
-.wechat-qr > img { display: block; width: 260px; height: auto; border-radius: 8px; background: #fff; }
+.wechat-qr > img { display: block; width: 260px; height: auto; padding: 8px; border: 1px solid rgba(244, 195, 52, .18); border-radius: 8px; background: #fff; box-shadow: 0 20px 60px rgba(0, 0, 0, .28); image-rendering: crisp-edges; }
 
 .site-footer { display: flex; justify-content: space-between; align-items: center; gap: 20px; min-height: 110px; color: rgba(244, 238, 219, .46); font-size: 11px; letter-spacing: .08em; }
 .site-footer div { display: flex; gap: 22px; }
@@ -177,6 +183,9 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--cream); outline
   .hero { padding-block: 54px 78px; }
   .hero h1 { font-size: clamp(54px, 18vw, 80px); }
   .hero-lede { font-size: 18px; }
+  .hero-signals { margin-top: 34px; }
+  .hero-signals div { min-height: 70px; padding: 14px 12px; }
+  .hero-signals strong { font-size: 14px; }
   .hero-visual { width: 100%; }
   .portrait-card { padding: 20px; }
   .section-block { padding-block: 78px; }

@@ -4,7 +4,8 @@ import { useEffect, useState } from 'react';
 
 // 在这里集中替换你的个人资料、作品和联系方式即可。
 const profile = {
-  name: 'TZ',
+  name: '天正',
+  monogram: 'TZ',
   brand: 'AI Lab',
   headline: '把想法变成\n真实作品',
   intro: '独立创作者与 AI 实践者。记录产品、内容与自动化从想法走向落地的全过程。',
@@ -15,7 +16,6 @@ const profile = {
   xHandle: '@ai_tianzheng',
   telegram: 'https://t.me/ai_tianzheng',
   telegramHandle: '@ai_tianzheng',
-  github: 'https://github.com/yourname',
 };
 
 const navItems = [
@@ -73,6 +73,7 @@ export default function Home() {
               key={item.id}
               className={`${activeSection === item.id ? 'is-active' : ''} ${item.id === 'contact' ? 'nav-cta' : ''}`}
               href={`#${item.id}`}
+              aria-current={activeSection === item.id ? 'location' : undefined}
               onClick={() => setActiveSection(item.id)}
             >
               {item.label}
@@ -95,6 +96,11 @@ export default function Home() {
             <a className="button primary" href="#works">阅读作品</a>
             <a className="button ghost" href="#contact">合作咨询</a>
           </div>
+          <div className="hero-signals" aria-label="关注方向">
+            <div><span>01</span><strong>AI 实践</strong></div>
+            <div><span>02</span><strong>产品设计</strong></div>
+            <div><span>03</span><strong>内容系统</strong></div>
+          </div>
         </div>
 
         <div className="hero-visual" aria-label="个人品牌视觉占位，可替换为你的头像">
@@ -102,7 +108,7 @@ export default function Home() {
           <div className="orbit orbit-two" />
           <div className="portrait-card">
             <span className="portrait-kicker">CREATIVE<br />INTELLIGENCE</span>
-            <strong>{profile.name}</strong>
+            <strong>{profile.monogram}</strong>
             <span className="portrait-label">AI × DESIGN × PRODUCT</span>
           </div>
           <span className="visual-note">01 / INTRO</span>
@@ -215,7 +221,11 @@ export default function Home() {
       <footer className="site-footer page-shell">
         <span>{profile.name} / {profile.brand}</span>
         <span>© 2026 BUILT WITH INTENTION</span>
-        <div><a href={profile.github}>GitHub</a><a href={profile.x}>X</a></div>
+        <div>
+          <a href={`mailto:${profile.email}`}>Email</a>
+          <a href={profile.telegram} target="_blank" rel="noreferrer">Telegram</a>
+          <a href={profile.x} target="_blank" rel="noreferrer">X</a>
+        </div>
       </footer>
     </main>
   );
