@@ -8,7 +8,7 @@ const profile = {
   monogram: 'TZ',
   brand: 'AI Lab',
   headline: '把想法变成\n真实作品',
-  intro: '独立创作者与 AI 实践者。记录产品、内容与自动化从想法走向落地的全过程。',
+  intro: '独立创作者与 AI 实践者。记录产品、内容与自动化从想法走向落地的全过程，也提供 AI 产品订阅、充值与落地咨询。',
   identity: 'BUILDER · CREATOR · EXPLORER',
   email: 'aitianzheng@gmail.com',
   wechatName: '天正',
@@ -26,18 +26,25 @@ const navItems = [
 ];
 
 const works = [
+  { title: 'AI 工具订阅与充值避坑指南', summary: '从开通、续费、支付失败到账号安全，整理普通用户真正会遇到的问题。', date: '2026-08-26', tag: 'AI SUBSCRIPTION' },
   { title: 'AI 工作流：从混乱到可复用', summary: '把一次性的提示词，整理成团队可以长期迭代的稳定工作流。', date: '2026-08-12', tag: 'AI WORKFLOW' },
   { title: '一个独立产品如何从 0 到 1', summary: '从需求判断、原型验证到上线复盘，一份不绕弯路的实战记录。', date: '2026-07-28', tag: 'PRODUCT' },
   { title: '一人公司的内容操作系统', summary: '用结构化素材库连接选题、写作、发布与复盘，让内容持续生长。', date: '2026-07-06', tag: 'CONTENT' },
   { title: '让 AI 接管重复但重要的工作', summary: '识别高频摩擦，设计可靠边界，再把自动化真正接入日常业务。', date: '2026-06-19', tag: 'AUTOMATION' },
   { title: '个人知识库不是资料仓库', summary: '让资料能够被检索、组合和行动，而不是安静地堆在文件夹里。', date: '2026-05-30', tag: 'KNOWLEDGE' },
-  { title: '创作者实验日志：第 01 期', summary: '公开记录这个月做了什么、学到什么，以及下一步准备验证什么。', date: '2026-05-08', tag: 'BUILD IN PUBLIC' },
 ];
 
 const services = [
+  { status: '开放中', live: true, title: 'AI 订阅 / 代充协助', text: '协助常用 AI 产品开通、续费、充值与支付失败排查，并提供基础使用建议。', action: '咨询代充' },
   { status: '开放中', live: true, title: 'AI 工作流咨询', text: '梳理业务里的重复劳动，设计适合个人或小团队的 AI 工作方式。', action: '预约沟通' },
   { status: '可预约', live: true, title: '个人品牌网站', text: '从定位、信息结构到设计与上线，交付一个真正属于你的数字门面。', action: '了解方案' },
   { status: '筹备中', live: false, title: '内容系统搭建', text: '把旧素材、选题和案例整理为可持续复用、可由 Agent 维护的内容资产。', action: '即将开放' },
+];
+
+const subscriptionScopes = [
+  { label: '常见产品', value: 'ChatGPT / Claude / Cursor / Midjourney / Gemini / Perplexity' },
+  { label: '服务内容', value: '订阅开通、续费充值、支付失败排查、使用入门' },
+  { label: '适合人群', value: '创作者、学生、独立开发者、小团队与 AI 新手' },
 ];
 
 export default function Home() {
@@ -97,7 +104,7 @@ export default function Home() {
             <a className="button ghost" href="#contact">合作咨询</a>
           </div>
           <div className="hero-signals" aria-label="关注方向">
-            <div><span>01</span><strong>AI 实践</strong></div>
+            <div><span>01</span><strong>AI 订阅</strong></div>
             <div><span>02</span><strong>产品设计</strong></div>
             <div><span>03</span><strong>内容系统</strong></div>
           </div>
@@ -149,7 +156,7 @@ export default function Home() {
             <div>
               <p className="section-kicker">HOW WE CAN WORK TOGETHER</p>
               <h2 id="services-title">Services</h2>
-              <p>把实践中验证过的方法，变成可交付的产品与服务。</p>
+              <p>从 AI 订阅、代充协助到工作流搭建，把实践中验证过的方法变成可交付的服务。</p>
             </div>
           </div>
           <div className="service-grid">
@@ -165,10 +172,19 @@ export default function Home() {
               </article>
             ))}
           </div>
+          <div className="business-strip" aria-label="AI 订阅与代充服务范围">
+            <span className="business-kicker">AI SUBSCRIPTION SUPPORT</span>
+            {subscriptionScopes.map((scope) => (
+              <div className="business-item" key={scope.label}>
+                <strong>{scope.label}</strong>
+                <p>{scope.value}</p>
+              </div>
+            ))}
+          </div>
           <div className="service-cta">
             <div>
               <span>HAVE A PROJECT IN MIND?</span>
-              <h3>有一个具体问题，直接聊聊。</h3>
+              <h3>需要订阅、充值或业务合作，直接聊聊。</h3>
             </div>
             <a className="button primary" href="#contact">发起合作</a>
           </div>
@@ -182,7 +198,7 @@ export default function Home() {
             <div>
               <p className="section-kicker">LET&apos;S MAKE SOMETHING REAL</p>
               <h2 id="contact-title">Contact</h2>
-              <p>欢迎交流 AI 应用、产品设计、个人品牌与内容系统。</p>
+              <p>欢迎交流 AI 订阅充值、AI 应用、产品设计、个人品牌与内容系统。</p>
             </div>
           </div>
           <div className="contact-board">
