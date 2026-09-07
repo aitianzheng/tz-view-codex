@@ -1,192 +1,248 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import { trackEvent } from './analytics';
 
-// 在这里集中替换你的个人资料、作品和联系方式即可。
+// Only publish confirmed contact details. A display name is not a WeChat ID.
 const profile = {
   name: '天正',
-  monogram: 'TZ',
-  brand: 'AI Lab',
-  headline: '把想法变成\n真实作品',
-  intro: '独立创作者与 AI 实践者。记录产品、内容与自动化从想法走向落地的全过程，也提供 AI 产品订阅、充值与落地咨询。',
-  identity: 'BUILDER · CREATOR · EXPLORER',
   email: 'aitianzheng@gmail.com',
-  wechatName: '天正',
   x: 'https://x.com/ai_tianzheng',
-  xHandle: '@ai_tianzheng',
   telegram: 'https://t.me/ai_tianzheng',
-  telegramHandle: '@ai_tianzheng',
 };
 
 const navItems = [
   { id: 'home', label: '首页' },
-  { id: 'works', label: '作品' },
-  { id: 'services', label: '服务' },
+  { id: 'works', label: '项目' },
+  { id: 'community', label: 'AI 社群' },
   { id: 'contact', label: '联系我' },
 ];
 
-const works = [
-  { title: 'AI 工具订阅与充值避坑指南', summary: '从开通、续费、支付失败到账号安全，整理普通用户真正会遇到的问题。', date: '2026-08-26', tag: 'AI SUBSCRIPTION' },
-  { title: 'AI 工作流：从混乱到可复用', summary: '把一次性的提示词，整理成团队可以长期迭代的稳定工作流。', date: '2026-08-12', tag: 'AI WORKFLOW' },
-  { title: '一个独立产品如何从 0 到 1', summary: '从需求判断、原型验证到上线复盘，一份不绕弯路的实战记录。', date: '2026-07-28', tag: 'PRODUCT' },
-  { title: '一人公司的内容操作系统', summary: '用结构化素材库连接选题、写作、发布与复盘，让内容持续生长。', date: '2026-07-06', tag: 'CONTENT' },
-  { title: '让 AI 接管重复但重要的工作', summary: '识别高频摩擦，设计可靠边界，再把自动化真正接入日常业务。', date: '2026-06-19', tag: 'AUTOMATION' },
-  { title: '个人知识库不是资料仓库', summary: '让资料能够被检索、组合和行动，而不是安静地堆在文件夹里。', date: '2026-05-30', tag: 'KNOWLEDGE' },
-];
+const projects = [
+  {
+    id: 'tz_mall', name: 'TZ Mall', category: 'AI 代充 / 充值',
+    href: 'https://tz-mall.com', domain: 'tz-mall.com',
+    description: 'AI 产品代充与充值服务。可用产品和服务说明，统一在站内查看。',
+    action: '查看 AI 代充',
+  },
+  {
+    id: 'tz_shop', name: 'TZ Shop', category: 'X Premium 代充',
+    href: 'https://tz-shop.com', domain: 'tz-shop.com',
+    description: 'X Premium 代充服务。根据你的需求，在站内查看当前方案与说明。',
+    action: '查看 X Premium 代充',
+  },
+] as const;
 
-const services = [
-  { status: '开放中', live: true, title: 'AI 订阅 / 代充协助', text: '协助常用 AI 产品开通、续费、充值与支付失败排查，并提供基础使用建议。', action: '咨询代充' },
-  { status: '开放中', live: true, title: 'AI 工作流咨询', text: '梳理业务里的重复劳动，设计适合个人或小团队的 AI 工作方式。', action: '预约沟通' },
-  { status: '可预约', live: true, title: '个人品牌网站', text: '从定位、信息结构到设计与上线，交付一个真正属于你的数字门面。', action: '了解方案' },
-  { status: '筹备中', live: false, title: '内容系统搭建', text: '把旧素材、选题和案例整理为可持续复用、可由 Agent 维护的内容资产。', action: '即将开放' },
-];
+const posts = [
+  {
+    id: 'us_stocks', topic: '美股',
+    title: '如何从 0 建立美股投资体系？附免费公开视频资源',
+    href: 'https://x.com/ai_tianzheng/status/2074695523009974272',
+  },
+  {
+    id: 'hk_banking', topic: '港卡', title: '去香港必看！港卡办理全攻略｜1小时拿下5张卡，全程线上操作✅',
+    href: 'https://x.com/ai_tianzheng/status/2057090260035842454',
+  },
+] as const;
 
-const subscriptionScopes = [
-  { label: '常见产品', value: 'ChatGPT / Claude / Cursor / Midjourney / Gemini / Perplexity' },
-  { label: '服务内容', value: '订阅开通、续费充值、支付失败排查、使用入门' },
-  { label: '适合人群', value: '创作者、学生、独立开发者、小团队与 AI 新手' },
-];
+function ContactLogo({ app }: { app: 'gmail' | 'telegram' | 'x' }) {
+  return (
+    <span className="contact-logo" aria-hidden="true">
+      {app === 'gmail' ? (
+        <svg viewBox="0 0 24 18" width="24" height="18" focusable="false">
+          <path fill="#4285f4" d="M1.636 18h3.819V8.727L0 4.636v11.728C0 17.269.733 18 1.636 18Z" />
+          <path fill="#34a853" d="M18.545 18h3.819C23.269 18 24 17.267 24 16.364V4.636l-5.455 4.091Z" />
+          <path fill="#fbbc04" d="M18.545 1.636v7.091L24 4.636V2.455C24 .431 21.691-.724 20.073.491Z" />
+          <path fill="#ea4335" d="M5.455 8.727V1.636L12 6.545l6.545-4.909v7.091L12 13.636Z" />
+          <path fill="#c5221f" d="M0 2.455v2.181l5.455 4.091V1.636L3.927.491C2.307-.724 0 .431 0 2.455Z" />
+        </svg>
+      ) : app === 'telegram' ? (
+        <svg viewBox="0 0 24 24" width="24" height="24" focusable="false">
+          <circle cx="12" cy="12" r="12" fill="#229ed9" />
+          <path fill="#fff" d="M5.49 11.74c3.5-1.52 5.83-2.53 7-3.02 3.33-1.38 4.02-1.62 4.47-1.63.1 0 .32.02.46.14.12.1.15.24.17.35.02.1.04.33.02.51-.18 1.89-.96 6.47-1.36 8.59-.17.9-.5 1.2-.82 1.23-.7.06-1.23-.46-1.91-.9-1.06-.7-1.66-1.13-2.7-1.82-1.19-.78-.42-1.22.26-1.92.18-.18 3.25-2.98 3.31-3.23.01-.03.02-.15-.06-.21-.07-.07-.18-.05-.26-.03-.12.03-1.79 1.14-5.01 3.31-.47.33-.9.49-1.29.48-.42-.01-1.24-.24-1.85-.44-.75-.24-1.35-.37-1.3-.78.03-.22.33-.44.87-.66Z" />
+        </svg>
+      ) : (
+        <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor" focusable="false">
+          <path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.64 7.584H.47l8.6-9.835L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z" />
+        </svg>
+      )}
+    </span>
+  );
+}
 
 export default function Home() {
   const [activeSection, setActiveSection] = useState('home');
+  const [copyMessage, setCopyMessage] = useState('');
 
   useEffect(() => {
+    if (!('IntersectionObserver' in window)) return;
     const sections = navItems
       .map(({ id }) => document.getElementById(id))
       .filter((section): section is HTMLElement => Boolean(section));
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const visible = entries
-          .filter((entry) => entry.isIntersecting)
-          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
-        if (visible?.target.id) setActiveSection(visible.target.id);
-      },
-      { rootMargin: '-18% 0px -62% 0px', threshold: [0, 0.2, 0.5] },
-    );
+    const observer = new IntersectionObserver((entries) => {
+      const visible = entries.filter((entry) => entry.isIntersecting)
+        .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+      if (visible) setActiveSection(visible.target.id);
+    }, { rootMargin: '-10% 0px -55% 0px', threshold: [0, 0.2, 0.5] });
     sections.forEach((section) => observer.observe(section));
     return () => observer.disconnect();
   }, []);
 
+  async function copyEmail() {
+    setCopyMessage('');
+    try {
+      await navigator.clipboard.writeText(profile.email);
+      setCopyMessage('邮箱已复制');
+      void trackEvent('contact_copy', 'email', 'contact');
+    } catch {
+      setCopyMessage('未能自动复制，请长按或选中上方邮箱地址复制。');
+    }
+  }
+
   return (
     <main>
+      <a className="skip-link" href="#works">跳转到项目与服务</a>
       <header className="site-header">
-        <a className="brand" href="#home" aria-label={`${profile.name} ${profile.brand} 首页`}>
+        <a className="brand" href="#home" aria-label="天正 AI Lab 首页">
           <span className="brand-mark" aria-hidden="true" />
-          <span>{profile.name} / {profile.brand}</span>
+          <span>天正 / AI Lab</span>
         </a>
         <nav className="nav" aria-label="主导航">
           {navItems.map((item) => (
-            <a
-              key={item.id}
+            <a key={item.id} href={`#${item.id}`}
               className={`${activeSection === item.id ? 'is-active' : ''} ${item.id === 'contact' ? 'nav-cta' : ''}`}
-              href={`#${item.id}`}
               aria-current={activeSection === item.id ? 'location' : undefined}
-              onClick={() => setActiveSection(item.id)}
-            >
+              onClick={() => {
+                setActiveSection(item.id);
+                if (item.id === 'contact') void trackEvent('contact_click', 'contact', 'nav');
+              }}>
               {item.label}
             </a>
           ))}
         </nav>
       </header>
 
-      <section className="hero page-shell story-section" id="home">
-        <div className="hero-copy">
-          <span className="eyebrow">PERSONAL STUDIO · 2026</span>
-          <h1>
-            {profile.headline.split('\n').map((line, index) => (
-              <span key={line} className={index === 1 ? 'gold' : ''}>{line}</span>
-            ))}
-          </h1>
-          <p className="hero-lede">{profile.intro}</p>
-          <p className="identity-line">{profile.identity}</p>
-          <div className="hero-actions">
-            <a className="button primary" href="#works">阅读作品</a>
-            <a className="button ghost" href="#contact">合作咨询</a>
-          </div>
-          <div className="hero-signals" aria-label="关注方向">
-            <div><span>01</span><strong>AI 订阅</strong></div>
-            <div><span>02</span><strong>产品设计</strong></div>
-            <div><span>03</span><strong>内容系统</strong></div>
-          </div>
-        </div>
-
-        <div className="hero-visual" aria-label="个人品牌视觉占位，可替换为你的头像">
-          <div className="orbit orbit-one" />
-          <div className="orbit orbit-two" />
-          <div className="portrait-card">
-            <span className="portrait-kicker">CREATIVE<br />INTELLIGENCE</span>
-            <strong>{profile.monogram}</strong>
-            <span className="portrait-label">AI × DESIGN × PRODUCT</span>
-          </div>
-          <span className="visual-note">01 / INTRO</span>
-        </div>
-      </section>
-
-      <section className="story-section section-block" id="works" aria-labelledby="works-title">
-        <div className="page-shell">
-          <div className="section-intro">
-            <span className="section-index">02</span>
-            <div>
-              <p className="section-kicker">SELECTED NOTES & PROJECTS</p>
-              <h2 id="works-title">Works</h2>
-              <p>近期公开写作与实践记录，持续更新我真正做过的项目。</p>
+      <div className="intro-grid page-shell story-section" id="home">
+        <section className="hero story-section" aria-labelledby="home-title">
+          <div className="hero-copy">
+            <p className="hero-greeting">你好，我是天正<span aria-hidden="true">。</span></p>
+            <h1 id="home-title"><span>用 AI 探索</span><span className="accent">Crypto 与美股</span></h1>
+            <p className="hero-lede">主业写代码，在 X 分享 AI、Crypto 与美股的学习实践。也在经营两个数字服务站，组织 AI 社群。</p>
+            <div className="hero-topics" aria-label="关注方向"><span>AI</span><span>Crypto</span><span>美股</span></div>
+            <div className="hero-actions" aria-label="快捷入口">
+              <a className="button primary" href="#wechat" onClick={() => void trackEvent('contact_click', 'wechat', 'hero')}>和我聊聊 <span aria-hidden="true">↗</span></a>
+              <a className="button ghost" href={profile.x} target="_blank" rel="noreferrer" onClick={() => void trackEvent('content_click', 'x', 'hero')}>我的 X 主页 <span aria-hidden="true">↗</span></a>
+            </div>
+            <div className="hero-services" aria-label="我的数字服务">
+              <span className="hero-services-label">正在经营</span>
+              {projects.map((project) => (
+                <a key={project.id} href={project.href} target="_blank" rel="noreferrer"
+                  aria-label={`${project.name} ${project.category}（在新窗口打开）`}
+                  onClick={() => void trackEvent('service_click', project.id, 'hero')}>
+                  {project.name} <span aria-hidden="true">↗</span>
+                </a>
+              ))}
             </div>
           </div>
-          <div className="work-grid">
-            {works.map((work, index) => (
-              <a className="work-card" href="#contact" key={work.title} aria-label={`查看作品：${work.title}`}>
-                <span className="work-number">{String(index + 1).padStart(2, '0')}</span>
-                <div className="work-copy">
-                  <span className="work-tag">{work.tag}</span>
-                  <h3>{work.title}</h3>
-                  <p>{work.summary}</p>
-                  <span className="work-date">{work.date}</span>
-                </div>
-                <span className="circle-arrow" aria-hidden="true">↗</span>
+        </section>
+      <section className="writing-panel story-section" id="writing" aria-labelledby="writing-title">
+        <div className="writing-panel-inner">
+          <div className="section-intro">
+            <div>
+              <p className="section-kicker">SELECTED NOTES</p>
+              <h2 id="writing-title">值得展开的两篇分享</h2>
+              <p>来自我的 X，关于美股与港卡。</p>
+            </div>
+          </div>
+          <div className="post-list">
+            {posts.map((post, index) => (
+              <a className="post-link" key={post.id} href={post.href} target="_blank" rel="noreferrer"
+                aria-label={`${post.title}（在新窗口打开 X 原文）`}
+                onClick={() => void trackEvent('content_click', post.id, 'writing')}>
+                <span className="post-topic"><span aria-hidden="true">0{index + 1}</span>{post.topic}</span>
+                <h3>{post.title}</h3>
+                <span className="post-action">阅读原文 <span aria-hidden="true">↗</span></span>
               </a>
             ))}
           </div>
+          <a className="text-link writing-more" href={profile.x} target="_blank" rel="noreferrer"
+            onClick={() => void trackEvent('content_click', 'x', 'writing')}>在 X 继续交流 <span aria-hidden="true">↗</span></a>
         </div>
       </section>
 
-      <section className="story-section section-block services-section" id="services" aria-labelledby="services-title">
+      </div>
+
+      <section className="story-section section-block projects-section" id="works" aria-labelledby="works-title">
         <div className="page-shell">
           <div className="section-intro">
-            <span className="section-index">03</span>
+            <span className="section-index" aria-hidden="true">01</span>
             <div>
-              <p className="section-kicker">HOW WE CAN WORK TOGETHER</p>
-              <h2 id="services-title">Services</h2>
-              <p>从 AI 订阅、代充协助到工作流搭建，把实践中验证过的方法变成可交付的服务。</p>
+              <p className="section-kicker">PROJECTS & SERVICES</p>
+              <h2 id="works-title">我的两个服务站</h2>
+              <p>把服务做成可直接使用的入口。</p>
             </div>
           </div>
-          <div className="service-grid">
-            {services.map((service, index) => (
-              <article className="service-card" key={service.title}>
-                <span className="service-number">{String(index + 1).padStart(2, '0')}</span>
-                <div>
-                  <span className={`status ${service.live ? 'live' : ''}`}>{service.status}</span>
-                  <h3>{service.title}</h3>
-                  <p>{service.text}</p>
+          <div className="featured-projects" id="services">
+            {projects.map((project) => (
+              <a className={`featured-project project-${project.id}`} key={project.id} href={project.href}
+                target="_blank" rel="noreferrer"
+                aria-label={`${project.action}，前往 ${project.name}（在新窗口打开）`}
+                onClick={() => void trackEvent('service_click', project.id, 'projects')}>
+                <div className="featured-project-copy">
+                  <span className="work-tag">{project.category}</span>
+                  <h3>{project.name}</h3>
+                  <span className="project-domain">{project.domain}</span>
+                  <p>{project.description}</p>
                 </div>
-                {service.live ? <a href="#contact">{service.action} <span>→</span></a> : <span className="pending">{service.action}</span>}
-              </article>
+                <div className="featured-project-meta">
+                  <span className="status live">运营中</span>
+                  <strong>{project.action} <span aria-hidden="true">↗</span></strong>
+                </div>
+              </a>
             ))}
           </div>
-          <div className="business-strip" aria-label="AI 订阅与代充服务范围">
-            <span className="business-kicker">AI SUBSCRIPTION SUPPORT</span>
-            {subscriptionScopes.map((scope) => (
-              <div className="business-item" key={scope.label}>
-                <strong>{scope.label}</strong>
-                <p>{scope.value}</p>
-              </div>
-            ))}
-          </div>
-          <div className="service-cta">
-            <div>
-              <span>HAVE A PROJECT IN MIND?</span>
-              <h3>需要订阅、充值或业务合作，直接聊聊。</h3>
+          <details className="service-guide">
+            <summary>下单与咨询说明</summary>
+            <div className="service-guide-content">
+              <p>这里是我的个人网站与服务入口，具体交易在对应服务站完成。</p>
+              <h3>方案、价格和售后规则在哪里看？</h3>
+              <p>以对应服务站当前公布的说明为准。下单前，请确认服务范围、交付方式和售后规则；有不清楚的地方，可以先联系我咨询。</p>
+              <h3>咨询时怎么说明需求？</h3>
+              <p>告诉我是 AI 产品还是 X Premium，以及想了解的问题。已有订单可说明来自哪个服务站。请勿发送账号密码、验证码或支付卡信息。</p>
+              <a className="text-link" href="#contact" onClick={() => void trackEvent('contact_click', 'contact', 'guide')}>还有问题？联系天正 <span aria-hidden="true">↗</span></a>
             </div>
-            <a className="button primary" href="#contact">发起合作</a>
+          </details>
+        </div>
+      </section>
+
+      <section className="story-section section-block community-section" id="community" aria-labelledby="community-title">
+        <div className="page-shell">
+          <div className="section-intro">
+            <span className="section-index" aria-hidden="true">02</span>
+            <div>
+              <p className="section-kicker">AI COMMUNITY</p>
+              <h2 id="community-title">AI 社群</h2>
+              <p>和正在做事的人，交流真实经验。</p>
+            </div>
+          </div>
+          <div className="community-board">
+            <div className="community-discussion">
+              <h3>我们聊什么</h3>
+              <ul className="community-topics">
+                <li>核心业务和项目经验分享</li>
+                <li>AI 产品、技术、内容方向交流</li>
+                <li>内容拓展和账号增长</li>
+                <li>商业化、资源和机会互通</li>
+              </ul>
+            </div>
+            <div className="community-invitation">
+              <h3>适合正在做事的你</h3>
+              <p>希望认识已经在做事情的朋友：有自己的项目、业务、产品，或比较明确的方向。</p>
+              <p className="community-principle">核心群不追求人数，更看重交流质量与长期价值。</p>
+              <a className="button primary" href="#wechat"
+                onClick={() => void trackEvent('contact_click', 'wechat', 'community')}>加微信，聊聊社群 <span aria-hidden="true">↓</span></a>
+              <p className="community-note">备注「AI 社群」，简单介绍一下你正在做的事。</p>
+            </div>
           </div>
         </div>
       </section>
@@ -194,53 +250,59 @@ export default function Home() {
       <section className="story-section section-block contact-section" id="contact" aria-labelledby="contact-title">
         <div className="page-shell">
           <div className="section-intro">
-            <span className="section-index">04</span>
+            <span className="section-index" aria-hidden="true">03</span>
             <div>
-              <p className="section-kicker">LET&apos;S MAKE SOMETHING REAL</p>
-              <h2 id="contact-title">Contact</h2>
-              <p>欢迎交流 AI 订阅充值、AI 应用、产品设计、个人品牌与内容系统。</p>
+              <p className="section-kicker">LET’S CONNECT</p>
+              <h2 id="contact-title">联系我</h2>
+              <p>Base 深圳，欢迎约Coffee Chat～</p>
             </div>
           </div>
           <div className="contact-board">
-            <div className="contact-links">
-              <a className="contact-card" href={`mailto:${profile.email}`}>
-                <img className="contact-logo contact-logo-gmail" src="/icons/gmail.svg" width="46" height="46" alt="" aria-hidden="true" />
-                <span><strong>Gmail</strong><em>{profile.email}</em></span>
-                <span className="contact-go">↗</span>
-              </a>
-              <a className="contact-card" href={profile.x} target="_blank" rel="noreferrer">
-                <img className="contact-logo contact-logo-x" src="/icons/x.svg" width="46" height="46" alt="" aria-hidden="true" />
-                <span><strong>X</strong><em>{profile.xHandle}</em></span>
-                <span className="contact-go">↗</span>
-              </a>
-              <a className="contact-card" href={profile.telegram} target="_blank" rel="noreferrer">
-                <img className="contact-logo" src="/icons/telegram.svg" width="46" height="46" alt="" aria-hidden="true" />
-                <span><strong>Telegram</strong><em>{profile.telegramHandle}</em></span>
-                <span className="contact-go">↗</span>
-              </a>
-            </div>
-            <div className="wechat-card">
+            <div className="wechat-card" id="wechat">
               <div className="wechat-copy">
-                <img className="contact-logo" src="/icons/wechat.svg" width="52" height="52" alt="" aria-hidden="true" />
-                <p>WECHAT</p>
-                <h3>{profile.wechatName}</h3>
-                <span>扫码添加我为微信好友</span>
+                <p>加我微信</p>
+                <h3>{profile.name}</h3>
+                <p className="wechat-instructions">扫码添加，简单注明来意即可。手机端可长按保存二维码，再到微信中识别。</p>
+                <a className="button qr-download" href="/wechat-tianzheng.png" download="天正-微信二维码.png"
+                  onClick={() => void trackEvent('wechat_qr_download', 'wechat', 'contact')}>保存微信二维码 <span aria-hidden="true">↓</span></a>
               </div>
               <div className="wechat-qr">
-                <img src="/wechat-tianzheng.png" width="354" height="358" alt="天正的微信二维码" />
+                <img src="/wechat-tianzheng.png" width="354" height="358" loading="lazy" decoding="async" alt="天正的微信二维码" />
               </div>
+            </div>
+            <div className="contact-links">
+              <div className="contact-card email-card">
+                <span className="contact-channel"><ContactLogo app="gmail" />邮件 / EMAIL</span>
+                <a className="email-address" href={`mailto:${profile.email}`} onClick={() => void trackEvent('contact_click', 'email', 'contact')}>{profile.email}</a>
+                <button className="text-link" type="button" onClick={copyEmail}>复制邮箱 <span aria-hidden="true">↗</span></button>
+                <span className="copy-feedback" role="status" aria-live="polite">{copyMessage}</span>
+              </div>
+              <a className="contact-card" href={profile.telegram} target="_blank" rel="noreferrer"
+                onClick={() => void trackEvent('contact_click', 'telegram', 'contact')}>
+                <span className="contact-channel"><ContactLogo app="telegram" />TELEGRAM</span>
+                <strong>@ai_tianzheng</strong>
+                <span className="text-link">发消息 <span aria-hidden="true">↗</span></span>
+              </a>
+              <a className="contact-card" href={profile.x} target="_blank" rel="noreferrer"
+                onClick={() => void trackEvent('content_click', 'x', 'contact')}>
+                <span className="contact-channel"><ContactLogo app="x" />X / 内容与交流</span>
+                <strong>@ai_tianzheng</strong>
+                <span className="text-link">前往个人主页 <span aria-hidden="true">↗</span></span>
+              </a>
             </div>
           </div>
         </div>
       </section>
 
       <footer className="site-footer page-shell">
-        <span>{profile.name} / {profile.brand}</span>
-        <span>© 2026 BUILT WITH INTENTION</span>
+        <span>天正 / AI Lab</span>
         <div>
-          <a href={`mailto:${profile.email}`}>Email</a>
-          <a href={profile.telegram} target="_blank" rel="noreferrer">Telegram</a>
-          <a href={profile.x} target="_blank" rel="noreferrer">X</a>
+          {projects.map((project) => <a key={project.id} href={project.href} target="_blank" rel="noreferrer"
+            onClick={() => void trackEvent('service_click', project.id, 'footer')}>{project.name} ↗</a>)}
+          <a href="#wechat" onClick={() => void trackEvent('contact_click', 'wechat', 'footer')}>微信</a>
+          <a href={`mailto:${profile.email}`} onClick={() => void trackEvent('contact_click', 'email', 'footer')}>邮件</a>
+          <a href={profile.telegram} target="_blank" rel="noreferrer" onClick={() => void trackEvent('contact_click', 'telegram', 'footer')}>Telegram</a>
+          <a href={profile.x} target="_blank" rel="noreferrer" onClick={() => void trackEvent('content_click', 'x', 'footer')}>X</a>
         </div>
       </footer>
     </main>

@@ -1,219 +1,32 @@
 @import 'tailwindcss';
 
 :root {
-  --black: #050505;
-  --ink: #0c0b09;
-  --panel: rgba(18, 16, 11, 0.82);
-  --gold: #f4c334;
-  --cream: #f4eedb;
-  --muted: #8e8b82;
-  --line: rgba(244, 195, 52, 0.24);
-  --line-strong: rgba(244, 195, 52, 0.56);
-  --max: 1440px;
-  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  color-scheme: dark;
+  --canvas: #101216;
+  --surface: #181c22;
+  --surface-raised: #1d232b;
+  --text: #eef1f5;
+  --muted: #abb3bf;
+  --accent: #9fd9f5;
+  --line: #303742;
+  --line-hover: #5a7183;
+  --max: 1120px;
 }
-
 * { box-sizing: border-box; }
-::selection { color: #070603; background: var(--gold); }
-html { scroll-behavior: smooth; scroll-padding-top: 78px; }
-body {
-  margin: 0;
-  min-width: 320px;
-  min-height: 100vh;
-  color: var(--cream);
-  background:
-    radial-gradient(circle at 78% 18%, rgba(244, 195, 52, 0.14), transparent 30rem),
-    radial-gradient(circle at 8% 86%, rgba(116, 69, 18, 0.18), transparent 26rem),
-    var(--black);
-  font-family: Arial, "PingFang SC", "Microsoft YaHei", sans-serif;
-}
-body::before {
-  content: '';
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  background-image:
-    linear-gradient(rgba(244, 195, 52, 0.028) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(244, 195, 52, 0.022) 1px, transparent 1px);
-  background-size: 92px 92px;
-  mask-image: linear-gradient(#000, transparent 74%);
-}
+html { scroll-behavior: smooth; scroll-padding-top: 88px; }
+body { margin: 0; min-width: 320px; color: var(--text); background: var(--canvas); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif; font-size: 1rem; line-height: 1.6; -webkit-font-smoothing: antialiased; }
 a { color: inherit; text-decoration: none; }
-a:focus-visible, button:focus-visible { outline: 2px solid var(--cream); outline-offset: 4px; }
-.page-shell { width: min(calc(100vw - 48px), var(--max)); margin-inline: auto; }
-.site-header {
-  position: sticky;
-  top: 0;
-  z-index: 20;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  min-height: 76px;
-  padding: 0 max(24px, calc((100vw - var(--max)) / 2));
-  border-bottom: 1px solid var(--line);
-  background: rgba(5, 5, 5, 0.82);
-  backdrop-filter: blur(18px);
-}
-.brand, .nav { display: flex; align-items: center; }
-.brand { gap: 12px; font-family: Georgia, "Times New Roman", serif; font-size: 21px; font-weight: 700; }
-.brand-mark { width: 18px; height: 18px; background: var(--gold); clip-path: polygon(50% 0, 61% 39%, 100% 50%, 61% 61%, 50% 100%, 39% 61%, 0 50%, 39% 39%); box-shadow: 0 0 24px rgba(244, 195, 52, .55); }
-.nav { gap: clamp(18px, 3.2vw, 54px); font-size: 14px; color: rgba(244, 238, 219, .62); }
-.nav a { position: relative; display: grid; place-items: center; min-height: 42px; transition: color .2s var(--ease); }
-.nav a::after { content: ''; position: absolute; bottom: 2px; width: 24px; height: 2px; background: var(--gold); transform: scaleX(0); transition: transform .2s var(--ease); }
-.nav a:hover, .nav a.is-active { color: var(--gold); }
-.nav a.is-active::after { transform: scaleX(1); }
-.nav .nav-cta { min-width: 84px; padding-inline: 18px; border: 1px solid var(--line-strong); border-radius: 6px; color: var(--cream); }
-.hero {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(380px, .86fr);
-  align-items: center;
-  gap: clamp(42px, 7vw, 120px);
-  min-height: calc(100svh - 76px);
-  padding-block: clamp(58px, 8vw, 110px);
-}
-.eyebrow { display: inline-flex; align-items: center; gap: 12px; color: var(--gold); font-size: 12px; letter-spacing: .16em; }
-.eyebrow::before { content: ''; width: 28px; height: 1px; background: var(--gold); }
-.hero h1 { margin: 28px 0 0; font-family: Georgia, "Songti SC", "Times New Roman", serif; font-size: clamp(64px, 7.8vw, 126px); line-height: .92; letter-spacing: -.055em; }
-.hero h1 span { display: block; }
-.hero h1 .gold { margin-top: 10px; color: var(--gold); }
-.hero-lede { max-width: 690px; margin: 34px 0 0; font-size: clamp(19px, 1.65vw, 27px); font-weight: 650; line-height: 1.55; }
-.identity-line { margin: 26px 0 0; color: var(--gold); font-size: 12px; letter-spacing: .12em; }
-.hero-actions { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 34px; }
-.hero-signals { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); max-width: 620px; margin-top: 44px; border: 1px solid var(--line); background: rgba(5, 5, 5, .42); }
-.hero-signals div { display: grid; gap: 8px; min-height: 78px; padding: 17px 20px; }
-.hero-signals div + div { border-left: 1px solid var(--line); }
-.hero-signals span { color: rgba(244, 238, 219, .35); font-family: Georgia, serif; font-size: 11px; }
-.hero-signals strong { color: rgba(244, 238, 219, .84); font-family: Georgia, "Songti SC", serif; font-size: 16px; }
-.button { display: inline-grid; place-items: center; min-height: 48px; padding: 0 25px; border: 1px solid var(--line-strong); border-radius: 5px; font-size: 14px; font-weight: 700; transition: transform .2s var(--ease), background .2s var(--ease); }
-.button:hover { transform: translateY(-2px); }
-.button.primary { color: #0a0906; background: var(--gold); border-color: var(--gold); }
-.button.ghost { background: rgba(244, 238, 219, .02); }
-.hero-visual { position: relative; display: grid; place-items: center; aspect-ratio: 1; }
-.orbit { position: absolute; border-radius: 50%; border: 1px solid var(--line); }
-.orbit-one { inset: 2%; box-shadow: inset 0 0 90px rgba(244, 195, 52, .08), 0 0 90px rgba(244, 195, 52, .08); }
-.orbit-two { inset: 15%; border-style: dashed; animation: spin 24s linear infinite; }
-.portrait-card { position: relative; display: flex; flex-direction: column; justify-content: space-between; width: 68%; aspect-ratio: .78; padding: 28px; overflow: hidden; border: 1px solid var(--line-strong); background: linear-gradient(155deg, rgba(244, 195, 52, .92), rgba(114, 68, 13, .66) 58%, #090806 59%); box-shadow: 0 34px 90px rgba(0,0,0,.5); transform: rotate(3deg); }
-.portrait-card::after { content: ''; position: absolute; inset: 10% -40% auto; height: 34%; border: 1px solid rgba(5,5,5,.35); transform: rotate(-14deg); }
-.portrait-kicker { position: relative; z-index: 1; color: #120e05; font-size: 11px; font-weight: 800; letter-spacing: .12em; line-height: 1.35; }
-.portrait-card strong { position: relative; z-index: 1; align-self: center; margin-top: 12%; font-family: Georgia, serif; color: var(--cream); font-size: clamp(84px, 11vw, 170px); line-height: 1; text-shadow: 10px 12px 0 rgba(5,5,5,.24); }
-.portrait-label { position: relative; z-index: 1; color: var(--gold); font-size: 10px; letter-spacing: .12em; }
-.visual-note { position: absolute; right: 2%; bottom: 8%; color: rgba(244,238,219,.48); font-size: 11px; letter-spacing: .14em; writing-mode: vertical-rl; }
-
-.story-section { position: relative; scroll-margin-top: 76px; }
-.section-block { padding: clamp(90px, 10vw, 150px) 0; border-top: 1px solid rgba(244, 195, 52, .1); }
-.section-intro { display: grid; grid-template-columns: 150px minmax(0, 1fr); align-items: end; gap: 22px; margin-bottom: 54px; }
-.section-index { font-family: Georgia, serif; color: rgba(244, 238, 219, .12); font-size: clamp(64px, 7vw, 112px); line-height: .8; }
-.section-kicker { margin: 0 0 12px !important; color: var(--gold) !important; font-size: 11px !important; letter-spacing: .16em; }
-.section-intro h2 { margin: 0; color: var(--gold); font-family: Georgia, "Times New Roman", serif; font-size: clamp(68px, 9.6vw, 142px); line-height: .78; letter-spacing: -.045em; }
-.section-intro div > p:last-child { margin: 24px 0 0; color: var(--muted); font-size: clamp(16px, 1.5vw, 21px); line-height: 1.65; }
-
-.work-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); border: 1px solid var(--line); background: rgba(5, 5, 5, .46); box-shadow: 0 30px 100px rgba(0,0,0,.26); }
-.work-card { position: relative; display: grid; grid-template-columns: 70px minmax(0, 1fr) 38px; gap: 18px; min-height: 250px; padding: 32px; border-bottom: 1px solid var(--line); transition: background .24s var(--ease); }
-.work-card:nth-child(odd) { border-right: 1px solid var(--line); }
-.work-card:nth-last-child(-n + 2) { border-bottom: 0; }
-.work-card:hover { background: rgba(244, 195, 52, .045); }
-.work-number, .service-number { font-family: Georgia, serif; color: rgba(244, 238, 219, .12); font-size: 48px; line-height: 1; }
-.work-copy { min-width: 0; }
-.work-tag { display: block; margin: 3px 0 20px; color: var(--gold); font-size: 10px; letter-spacing: .13em; }
-.work-card h3 { margin: 0; font-family: Georgia, "Songti SC", serif; font-size: clamp(22px, 2vw, 30px); line-height: 1.3; }
-.work-card p { margin: 14px 0 22px; color: var(--muted); font-size: 14px; line-height: 1.72; }
-.work-date { color: rgba(244, 238, 219, .48); font-size: 12px; letter-spacing: .06em; }
-.circle-arrow { display: grid; place-items: center; width: 34px; height: 34px; border: 1px solid var(--line); border-radius: 50%; color: var(--gold); transition: background .2s var(--ease), color .2s var(--ease); }
-.work-card:hover .circle-arrow { color: #0a0906; background: var(--gold); }
-
-.services-section { overflow: hidden; background: linear-gradient(90deg, transparent, rgba(244, 195, 52, .035), transparent); }
-.services-section::before { content: ''; position: absolute; inset: 0; pointer-events: none; background-image: linear-gradient(rgba(244, 195, 52, .026) 1px, transparent 1px), linear-gradient(90deg, rgba(244, 195, 52, .022) 1px, transparent 1px); background-size: 70px 70px; }
-.services-section .page-shell { position: relative; }
-.service-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); border: solid var(--line); border-width: 1px 1px 0; }
-.service-card { display: grid; grid-template-rows: auto 1fr auto; min-height: 340px; padding: 34px; background: rgba(7, 7, 6, .74); border-bottom: 1px solid var(--line); }
-.service-card + .service-card { border-left: 1px solid var(--line); }
-.service-card:nth-child(odd) { border-left: 0; }
-.service-card > div { margin: 26px 0; }
-.status { display: inline-flex; padding: 6px 11px; border: 1px solid rgba(244, 238, 219, .16); border-radius: 999px; color: var(--muted); font-size: 11px; }
-.status.live { border-color: rgba(101, 204, 187, .44); color: #65ccbb; }
-.service-card h3 { margin: 18px 0 14px; font-family: Georgia, "Songti SC", serif; font-size: clamp(27px, 2.3vw, 38px); }
-.service-card p { margin: 0; color: var(--muted); font-size: 14px; line-height: 1.75; }
-.service-card > a { justify-self: start; color: var(--gold); font-size: 13px; border-bottom: 1px solid var(--gold); padding-bottom: 6px; }
-.service-card > a span { display: inline-block; margin-left: 8px; transition: transform .2s var(--ease); }
-.service-card > a:hover span { transform: translateX(4px); }
-.pending { align-self: end; color: rgba(244, 238, 219, .32); font-size: 13px; }
-.business-strip { display: grid; grid-template-columns: .9fr repeat(3, minmax(0, 1fr)); gap: 0; border: solid var(--line); border-width: 0 1px 1px; background: rgba(244, 195, 52, .04); }
-.business-kicker, .business-item { min-height: 128px; padding: 26px 28px; }
-.business-kicker { display: grid; align-content: center; color: var(--gold); font-size: 10px; font-weight: 800; letter-spacing: .16em; border-right: 1px solid var(--line); }
-.business-item + .business-item { border-left: 1px solid var(--line); }
-.business-item strong { display: block; color: rgba(244, 238, 219, .9); font-family: Georgia, "Songti SC", serif; font-size: 18px; }
-.business-item p { margin: 12px 0 0; color: var(--muted); font-size: 13px; line-height: 1.7; }
-.service-cta { display: flex; justify-content: space-between; align-items: center; gap: 26px; padding: 34px; border: solid var(--line); border-width: 0 1px 1px; background: linear-gradient(90deg, rgba(244, 195, 52, .075), rgba(244, 238, 219, .015)); }
-.service-cta span { color: var(--gold); font-size: 10px; letter-spacing: .16em; }
-.service-cta h3 { margin: 8px 0 0; font-family: Georgia, "Songti SC", serif; font-size: clamp(25px, 3vw, 42px); }
-
-.contact-board { border: 1px solid var(--line); background: rgba(10, 9, 7, .7); }
-.contact-links { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); }
-.contact-card { display: grid; grid-template-columns: 48px minmax(0, 1fr) 24px; align-items: center; gap: 16px; min-height: 150px; padding: 28px; transition: background .2s var(--ease); }
-.contact-card + .contact-card { border-left: 1px solid var(--line); }
-.contact-card:hover { background: rgba(244, 195, 52, .04); }
-.contact-logo { display: block; width: 46px; height: 46px; object-fit: contain; }
-.contact-logo-gmail { height: 34px; }
-.contact-logo-x { padding: 6px; }
-.contact-card strong { display: block; font-family: Georgia, "Songti SC", serif; font-size: 22px; }
-.contact-card em { display: block; margin-top: 7px; color: var(--muted); font-size: 13px; font-style: normal; overflow-wrap: anywhere; }
-.contact-go { color: var(--gold); }
-.wechat-card { display: grid; grid-template-columns: minmax(0, 1fr) 260px; align-items: center; gap: clamp(36px, 7vw, 110px); min-height: 360px; padding: 38px; border-top: 1px solid var(--line); background: linear-gradient(105deg, transparent 30%, rgba(244, 195, 52, .06)); }
-.wechat-copy { display: grid; grid-template-columns: 56px 1fr; align-items: center; column-gap: 20px; }
-.wechat-copy .contact-logo { grid-row: 1 / 4; width: 52px; height: 52px; }
-.wechat-card p { margin: 0; color: var(--gold); font-size: 10px; letter-spacing: .15em; }
-.wechat-card h3 { margin: 5px 0; font-family: Georgia, serif; font-size: clamp(32px, 4vw, 58px); }
-.wechat-copy > span:last-child { color: var(--muted); font-size: 13px; }
-.wechat-qr { display: grid; justify-items: stretch; width: 260px; }
-.wechat-qr > img { display: block; width: 260px; height: auto; padding: 8px; border: 1px solid rgba(244, 195, 52, .18); border-radius: 8px; background: #fff; box-shadow: 0 20px 60px rgba(0, 0, 0, .28); image-rendering: crisp-edges; }
-
-.site-footer { display: flex; justify-content: space-between; align-items: center; gap: 20px; min-height: 110px; color: rgba(244, 238, 219, .46); font-size: 11px; letter-spacing: .08em; }
-.site-footer div { display: flex; gap: 22px; }
-.site-footer a:hover { color: var(--gold); }
-@keyframes spin { to { transform: rotate(360deg); } }
-@media (max-width: 920px) {
-  .hero { grid-template-columns: 1fr; min-height: auto; }
-  .hero-visual { width: min(100%, 560px); justify-self: center; }
-  .work-grid, .service-grid { grid-template-columns: 1fr; }
-  .work-card:nth-child(odd) { border-right: 0; }
-  .work-card:nth-last-child(2) { border-bottom: 1px solid var(--line); }
-  .service-card { min-height: 330px; }
-  .service-card + .service-card { border-left: 0; }
-  .business-strip { grid-template-columns: 1fr; }
-  .business-kicker { border-right: 0; border-bottom: 1px solid var(--line); }
-  .business-item + .business-item { border-left: 0; border-top: 1px solid var(--line); }
-  .contact-links { grid-template-columns: 1fr; }
-  .contact-card + .contact-card { border-left: 0; border-top: 1px solid var(--line); }
-}
-@media (max-width: 680px) {
-  .page-shell { width: auto; margin-inline: 16px; }
-  .site-header { position: relative; align-items: flex-start; flex-direction: column; gap: 10px; padding: 18px 16px; }
-  .nav { width: 100%; gap: 8px; overflow-x: auto; }
-  .nav a { min-width: max-content; }
-  .hero { padding-block: 54px 78px; }
-  .hero h1 { font-size: clamp(54px, 18vw, 80px); }
-  .hero-lede { font-size: 18px; }
-  .hero-signals { margin-top: 34px; }
-  .hero-signals div { min-height: 70px; padding: 14px 12px; }
-  .hero-signals strong { font-size: 14px; }
-  .hero-visual { width: 100%; }
-  .portrait-card { padding: 20px; }
-  .section-block { padding-block: 78px; }
-  .section-intro { grid-template-columns: 1fr; gap: 24px; margin-bottom: 38px; }
-  .section-index { font-size: 58px; }
-  .section-intro h2 { font-size: 64px; }
-  .work-card { grid-template-columns: 44px minmax(0, 1fr) 30px; gap: 12px; min-height: 0; padding: 24px 16px; }
-  .work-number { font-size: 38px; }
-  .work-card h3 { font-size: 21px; }
-  .service-card { min-height: 300px; padding: 26px 20px; }
-  .service-cta { align-items: flex-start; flex-direction: column; padding: 26px 20px; }
-  .contact-card { grid-template-columns: 44px minmax(0, 1fr) 20px; min-height: 118px; padding: 20px 16px; }
-  .wechat-card { grid-template-columns: 1fr; align-items: flex-start; min-height: 260px; padding: 28px 20px; }
-  .wechat-copy { grid-template-columns: 48px minmax(0, 1fr); column-gap: 14px; }
-  .wechat-card h3 { font-size: 30px; overflow-wrap: anywhere; }
-  .wechat-qr { justify-self: center; width: min(100%, 260px); }
-  .wechat-qr > img { width: 100%; }
-  .site-footer { align-items: flex-start; flex-direction: column; justify-content: center; padding-block: 28px; }
+button, summary { font: inherit; cursor: pointer; }
+button { color: inherit; }
+a:focus-visible, button:focus-visible, summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 5px; }
+::selection { color: var(--canvas); background: var(--accent); }
+.page-shell { width: min(calc(100% - 64px), var(--max)); margin-inline: auto; }
+.story-section, #services, #wechat { scroll-margin-top: 88px; }
+img { max-width: 100%; }
+@media (max-width: 640px) {
+  .page-shell { width: calc(100% - 32px); }
+  html { scroll-padding-top: 20px; }
+  .story-section, #services, #wechat { scroll-margin-top: 20px; }
 }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { scroll-behavior: auto !important; animation: none !important; transition: none !important; }
