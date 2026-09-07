@@ -7,44 +7,47 @@ const profile = {
   name: '天正',
   monogram: 'TZ',
   brand: 'AI Lab',
-  headline: '把想法变成\n真实作品',
-  intro: '独立创作者与 AI 实践者。记录产品、内容与自动化从想法走向落地的全过程，也提供 AI 产品订阅、充值与落地咨询。',
-  identity: 'BUILDER · CREATOR · EXPLORER',
+  headline: 'AI 内容\n产品与服务',
+  intro: '我是天正，一名独立创作者与 AI 实践者。正在用 AI 做内容、做产品，也经营 TZ Mall AI 代充 / 充值服务；代码与开发是我把想法落地的方法。',
+  identity: 'AI CONTENT · PRODUCT PRACTICE · DIGITAL SERVICES',
   email: 'aitianzheng@gmail.com',
   wechatName: '天正',
   x: 'https://x.com/ai_tianzheng',
   xHandle: '@ai_tianzheng',
   telegram: 'https://t.me/ai_tianzheng',
   telegramHandle: '@ai_tianzheng',
+  mall: 'https://tz-mall.com',
 };
 
 const navItems = [
   { id: 'home', label: '首页' },
-  { id: 'works', label: '作品' },
+  { id: 'works', label: '内容与项目' },
   { id: 'services', label: '服务' },
   { id: 'contact', label: '联系我' },
 ];
 
-const works = [
-  { title: 'AI 工具订阅与充值避坑指南', summary: '从开通、续费、支付失败到账号安全，整理普通用户真正会遇到的问题。', date: '2026-08-26', tag: 'AI SUBSCRIPTION' },
-  { title: 'AI 工作流：从混乱到可复用', summary: '把一次性的提示词，整理成团队可以长期迭代的稳定工作流。', date: '2026-08-12', tag: 'AI WORKFLOW' },
-  { title: '一个独立产品如何从 0 到 1', summary: '从需求判断、原型验证到上线复盘，一份不绕弯路的实战记录。', date: '2026-07-28', tag: 'PRODUCT' },
-  { title: '一人公司的内容操作系统', summary: '用结构化素材库连接选题、写作、发布与复盘，让内容持续生长。', date: '2026-07-06', tag: 'CONTENT' },
-  { title: '让 AI 接管重复但重要的工作', summary: '识别高频摩擦，设计可靠边界，再把自动化真正接入日常业务。', date: '2026-06-19', tag: 'AUTOMATION' },
-  { title: '个人知识库不是资料仓库', summary: '让资料能够被检索、组合和行动，而不是安静地堆在文件夹里。', date: '2026-05-30', tag: 'KNOWLEDGE' },
+const focusAreas = [
+  { title: 'AI 内容', text: '围绕 AI 工具、工作流与真实使用问题持续记录。' },
+  { title: '产品实践', text: '把想法拆成可以运行、可以继续迭代的产品与工作方式。' },
+  { title: '数字服务', text: '正在经营 TZ Mall，为 AI 用户提供代充与充值服务入口。' },
+];
+
+const contentTopics = [
+  { title: 'AI 工具与订阅', summary: '关注工具选择、开通续费、支付问题与账号使用中的真实体验。', meta: '持续记录', tag: 'AI TOOLS' },
+  { title: '产品与工作流', summary: '记录如何把一次性尝试整理成可重复使用的流程，并把想法推进成可运行的产品。', meta: '持续实践', tag: 'PRODUCT' },
+  { title: '内容与知识系统', summary: '探索选题、写作、素材整理与知识管理如何更自然地和 AI 协作。', meta: '内容方向', tag: 'CONTENT' },
+  { title: '自动化与实现', summary: '从重复工作中寻找可自动化的环节，用 AI、代码与工具完成落地。', meta: '实现能力', tag: 'AUTOMATION' },
 ];
 
 const services = [
-  { status: '开放中', live: true, title: 'AI 订阅 / 代充协助', text: '协助常用 AI 产品开通、续费、充值与支付失败排查，并提供基础使用建议。', action: '咨询代充' },
-  { status: '开放中', live: true, title: 'AI 工作流咨询', text: '梳理业务里的重复劳动，设计适合个人或小团队的 AI 工作方式。', action: '预约沟通' },
-  { status: '可预约', live: true, title: '个人品牌网站', text: '从定位、信息结构到设计与上线，交付一个真正属于你的数字门面。', action: '了解方案' },
-  { status: '筹备中', live: false, title: '内容系统搭建', text: '把旧素材、选题和案例整理为可持续复用、可由 Agent 维护的内容资产。', action: '即将开放' },
+  { status: '运营中', live: true, title: 'TZ Mall AI 代充 / 充值', text: '提供 AI 产品的订阅开通、续费与充值服务，可直接前往 TZ Mall 查看当前项目与服务说明。', action: '前往 TZ Mall', href: profile.mall, external: true },
+  { status: '欢迎交流', live: false, title: 'AI 内容与产品交流', text: '如果你也在做 AI 内容、产品或数字服务，欢迎交流实践、需求与可能的合作。', action: '联系我', href: '#contact', external: false },
 ];
 
-const subscriptionScopes = [
-  { label: '常见产品', value: 'ChatGPT / Claude / Cursor / Midjourney / Gemini / Perplexity' },
-  { label: '服务内容', value: '订阅开通、续费充值、支付失败排查、使用入门' },
-  { label: '适合人群', value: '创作者、学生、独立开发者、小团队与 AI 新手' },
+const serviceScopes = [
+  { label: '服务入口', value: 'TZ Mall AI 代充 / 充值服务站' },
+  { label: '服务内容', value: 'AI 产品订阅开通、续费与充值' },
+  { label: '当前范围', value: '具体产品与可用服务以 TZ Mall 页面为准' },
 ];
 
 export default function Home() {
@@ -91,7 +94,7 @@ export default function Home() {
 
       <section className="hero page-shell story-section" id="home">
         <div className="hero-copy">
-          <span className="eyebrow">PERSONAL STUDIO · 2026</span>
+          <span className="eyebrow">INDEPENDENT CREATOR · AI PRACTICE</span>
           <h1>
             {profile.headline.split('\n').map((line, index) => (
               <span key={line} className={index === 1 ? 'gold' : ''}>{line}</span>
@@ -100,25 +103,46 @@ export default function Home() {
           <p className="hero-lede">{profile.intro}</p>
           <p className="identity-line">{profile.identity}</p>
           <div className="hero-actions">
-            <a className="button primary" href="#works">阅读作品</a>
-            <a className="button ghost" href="#contact">合作咨询</a>
+            <a className="button primary" href={profile.mall} target="_blank" rel="noopener noreferrer">前往 TZ Mall ↗</a>
+            <a className="button ghost" href="#contact">微信 / 联系我</a>
           </div>
           <div className="hero-signals" aria-label="关注方向">
-            <div><span>01</span><strong>AI 订阅</strong></div>
-            <div><span>02</span><strong>产品设计</strong></div>
-            <div><span>03</span><strong>内容系统</strong></div>
+            <div><span>01</span><strong>AI 内容</strong></div>
+            <div><span>02</span><strong>产品实践</strong></div>
+            <div><span>03</span><strong>TZ Mall</strong></div>
           </div>
         </div>
 
-        <div className="hero-visual" aria-label="个人品牌视觉占位，可替换为你的头像">
+        <div className="hero-visual" aria-label="天正 AI Lab 品牌视觉">
           <div className="orbit orbit-one" />
           <div className="orbit orbit-two" />
           <div className="portrait-card">
-            <span className="portrait-kicker">CREATIVE<br />INTELLIGENCE</span>
+            <span className="portrait-kicker">AI IN<br />PRACTICE</span>
             <strong>{profile.monogram}</strong>
-            <span className="portrait-label">AI × DESIGN × PRODUCT</span>
+            <span className="portrait-label">CONTENT × PRODUCT × SERVICE</span>
           </div>
           <span className="visual-note">01 / INTRO</span>
+        </div>
+      </section>
+
+      <section className="now-section" aria-labelledby="now-title">
+        <div className="page-shell">
+          <div className="now-heading">
+            <div>
+              <p className="section-kicker">WHAT I DO</p>
+              <h2 id="now-title">内容、产品与真实服务</h2>
+            </div>
+            <p>我用 AI 做内容，也围绕产品、工作流与自动化持续实践。代码与开发是把想法落地的工具；TZ Mall 是我目前正在经营的 AI 代充 / 充值服务。</p>
+          </div>
+          <div className="now-grid">
+            {focusAreas.map((area, index) => (
+              <article className="now-card" key={area.title}>
+                <span>{String(index + 1).padStart(2, '0')}</span>
+                <h3>{area.title}</h3>
+                <p>{area.text}</p>
+              </article>
+            ))}
+          </div>
         </div>
       </section>
 
@@ -127,23 +151,39 @@ export default function Home() {
           <div className="section-intro">
             <span className="section-index">02</span>
             <div>
-              <p className="section-kicker">SELECTED NOTES & PROJECTS</p>
+              <p className="section-kicker">CONTENT, PROJECTS & PRACTICE</p>
               <h2 id="works-title">Works</h2>
-              <p>近期公开写作与实践记录，持续更新我真正做过的项目。</p>
+              <p>这里呈现我正在经营的真实项目，以及持续投入的 AI 内容与产品实践方向。</p>
             </div>
           </div>
+          <a
+            className="featured-project"
+            href={profile.mall}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="访问 TZ Mall AI 代充与充值服务站（在新窗口打开）"
+          >
+            <div className="featured-project-copy">
+              <span className="work-tag">LIVE DIGITAL SERVICE</span>
+              <h3>TZ Mall</h3>
+              <p>我正在经营的 AI 代充 / 充值服务站。站内提供当前可用项目与服务说明，是一项真实运行中的数字服务。</p>
+            </div>
+            <div className="featured-project-meta">
+              <span className="status live">正在运营</span>
+              <strong>访问服务站 <span aria-hidden="true">↗</span></strong>
+            </div>
+          </a>
           <div className="work-grid">
-            {works.map((work, index) => (
-              <a className="work-card" href="#contact" key={work.title} aria-label={`查看作品：${work.title}`}>
+            {contentTopics.map((topic, index) => (
+              <article className="work-card is-static" key={topic.title}>
                 <span className="work-number">{String(index + 1).padStart(2, '0')}</span>
                 <div className="work-copy">
-                  <span className="work-tag">{work.tag}</span>
-                  <h3>{work.title}</h3>
-                  <p>{work.summary}</p>
-                  <span className="work-date">{work.date}</span>
+                  <span className="work-tag">{topic.tag}</span>
+                  <h3>{topic.title}</h3>
+                  <p>{topic.summary}</p>
+                  <span className="work-meta">{topic.meta}</span>
                 </div>
-                <span className="circle-arrow" aria-hidden="true">↗</span>
-              </a>
+              </article>
             ))}
           </div>
         </div>
@@ -154,9 +194,9 @@ export default function Home() {
           <div className="section-intro">
             <span className="section-index">03</span>
             <div>
-              <p className="section-kicker">HOW WE CAN WORK TOGETHER</p>
+              <p className="section-kicker">AVAILABLE NOW & LET&apos;S TALK</p>
               <h2 id="services-title">Services</h2>
-              <p>从 AI 订阅、代充协助到工作流搭建，把实践中验证过的方法变成可交付的服务。</p>
+              <p>目前可以直接使用的服务，以及欢迎进一步沟通的 AI 内容与产品方向。</p>
             </div>
           </div>
           <div className="service-grid">
@@ -168,13 +208,21 @@ export default function Home() {
                   <h3>{service.title}</h3>
                   <p>{service.text}</p>
                 </div>
-                {service.live ? <a href="#contact">{service.action} <span>→</span></a> : <span className="pending">{service.action}</span>}
+                {service.href ? (
+                  <a
+                    href={service.href}
+                    target={service.external ? '_blank' : undefined}
+                    rel={service.external ? 'noopener noreferrer' : undefined}
+                  >
+                    {service.action} <span aria-hidden="true">{service.external ? '↗' : '→'}</span>
+                  </a>
+                ) : <span className="pending">{service.action}</span>}
               </article>
             ))}
           </div>
-          <div className="business-strip" aria-label="AI 订阅与代充服务范围">
-            <span className="business-kicker">AI SUBSCRIPTION SUPPORT</span>
-            {subscriptionScopes.map((scope) => (
+          <div className="business-strip" aria-label="TZ Mall 服务说明">
+            <span className="business-kicker">TZ MALL SERVICE</span>
+            {serviceScopes.map((scope) => (
               <div className="business-item" key={scope.label}>
                 <strong>{scope.label}</strong>
                 <p>{scope.value}</p>
@@ -183,10 +231,10 @@ export default function Home() {
           </div>
           <div className="service-cta">
             <div>
-              <span>HAVE A PROJECT IN MIND?</span>
-              <h3>需要订阅、充值或业务合作，直接聊聊。</h3>
+              <span>HAVE SOMETHING TO SHARE?</span>
+              <h3>想交流 AI 内容、产品或数字服务？欢迎联系。</h3>
             </div>
-            <a className="button primary" href="#contact">发起合作</a>
+            <a className="button primary" href="#contact">联系我</a>
           </div>
         </div>
       </section>
@@ -196,39 +244,39 @@ export default function Home() {
           <div className="section-intro">
             <span className="section-index">04</span>
             <div>
-              <p className="section-kicker">LET&apos;S MAKE SOMETHING REAL</p>
+              <p className="section-kicker">LET&apos;S CONNECT</p>
               <h2 id="contact-title">Contact</h2>
-              <p>欢迎交流 AI 订阅充值、AI 应用、产品设计、个人品牌与内容系统。</p>
+              <p>想交流 AI 内容、产品或数字服务，或咨询 TZ Mall 相关问题，欢迎通过微信、邮件、X 或 Telegram 联系我。</p>
             </div>
           </div>
           <div className="contact-board">
+            <div className="wechat-card">
+              <div className="wechat-copy">
+                <img className="contact-logo" src="/icons/wechat.svg" width="52" height="52" alt="" aria-hidden="true" />
+                <p>WECHAT</p>
+                <h3>{profile.wechatName}</h3>
+                <span>扫码添加天正，简单注明来意即可</span>
+              </div>
+              <div className="wechat-qr">
+                <img src="/wechat-tianzheng.png" width="354" height="358" alt="天正的微信二维码" />
+              </div>
+            </div>
             <div className="contact-links">
               <a className="contact-card" href={`mailto:${profile.email}`}>
                 <img className="contact-logo contact-logo-gmail" src="/icons/gmail.svg" width="46" height="46" alt="" aria-hidden="true" />
                 <span><strong>Gmail</strong><em>{profile.email}</em></span>
                 <span className="contact-go">↗</span>
               </a>
-              <a className="contact-card" href={profile.x} target="_blank" rel="noreferrer">
+              <a className="contact-card" href={profile.x} target="_blank" rel="noopener noreferrer">
                 <img className="contact-logo contact-logo-x" src="/icons/x.svg" width="46" height="46" alt="" aria-hidden="true" />
                 <span><strong>X</strong><em>{profile.xHandle}</em></span>
                 <span className="contact-go">↗</span>
               </a>
-              <a className="contact-card" href={profile.telegram} target="_blank" rel="noreferrer">
+              <a className="contact-card" href={profile.telegram} target="_blank" rel="noopener noreferrer">
                 <img className="contact-logo" src="/icons/telegram.svg" width="46" height="46" alt="" aria-hidden="true" />
                 <span><strong>Telegram</strong><em>{profile.telegramHandle}</em></span>
                 <span className="contact-go">↗</span>
               </a>
-            </div>
-            <div className="wechat-card">
-              <div className="wechat-copy">
-                <img className="contact-logo" src="/icons/wechat.svg" width="52" height="52" alt="" aria-hidden="true" />
-                <p>WECHAT</p>
-                <h3>{profile.wechatName}</h3>
-                <span>扫码添加我为微信好友</span>
-              </div>
-              <div className="wechat-qr">
-                <img src="/wechat-tianzheng.png" width="354" height="358" alt="天正的微信二维码" />
-              </div>
             </div>
           </div>
         </div>
@@ -236,11 +284,13 @@ export default function Home() {
 
       <footer className="site-footer page-shell">
         <span>{profile.name} / {profile.brand}</span>
-        <span>© 2026 BUILT WITH INTENTION</span>
+        <span>AI CONTENT · PRODUCTS · DIGITAL SERVICES</span>
         <div>
+          <a href={profile.mall} target="_blank" rel="noopener noreferrer">TZ Mall</a>
+          <a href="#contact">WeChat</a>
           <a href={`mailto:${profile.email}`}>Email</a>
-          <a href={profile.telegram} target="_blank" rel="noreferrer">Telegram</a>
-          <a href={profile.x} target="_blank" rel="noreferrer">X</a>
+          <a href={profile.telegram} target="_blank" rel="noopener noreferrer">Telegram</a>
+          <a href={profile.x} target="_blank" rel="noopener noreferrer">X</a>
         </div>
       </footer>
     </main>

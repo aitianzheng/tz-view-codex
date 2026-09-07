@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AI 时代｜快速打造并上线个人网站</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600;700&amp;family=Noto+Sans+SC:wght@400;600;800;900&amp;display=swap" rel="stylesheet">
+  <style>
+    /* === THEME === */
+    :root { --stage-bg:#02070c; --slide-bg:#061019; --paper:#e8f4f4; --muted:#7f9aa4; --cyan:#57e6d1; --orange:#ff8a26; --line:rgba(87,230,209,.22); --sans:"Noto Sans SC",sans-serif; --mono:"IBM Plex Mono",monospace; --ease:cubic-bezier(.16,1,.3,1); }
+    * { box-sizing:border-box; }
+
+    /* ===========================================
+       FIXED 16:9 STAGE: MANDATORY BASE STYLES
+       Include this ENTIRE file in every presentation.
+       Slides are authored at 1920×1080 and scaled as a whole.
+       =========================================== */
+    html, body { width:100%; height:100%; margin:0; overflow:hidden; background:var(--stage-bg,#000); }
+    .deck-viewport { position:fixed; inset:0; overflow:hidden; background:var(--stage-bg,#000); }
+    .deck-stage { position:absolute; left:0; top:0; width:1920px; height:1080px; overflow:hidden; transform-origin:0 0; background:var(--slide-bg,#fff); }
+    .slide { position:absolute; inset:0; width:1920px; height:1080px; overflow:hidden; display:block; visibility:hidden; opacity:0; pointer-events:none; background:var(--slide-bg,#fff); }
+    .slide.active, .slide.visible { visibility:visible; opacity:1; pointer-events:auto; z-index:1; }
+    img, video, canvas, svg { max-width:100%; max-height:100%; }
+    .deck-controls { position:fixed; left:50%; bottom:22px; transform:translateX(-50%); z-index:1000; }
+    @media print { html,body{width:1920px;height:auto;overflow:visible;background:#fff}.deck-viewport{position:static;overflow:visible;background:#fff}.deck-stage{position:static;width:auto;height:auto;transform:none!important;background:none}.slide{position:relative;display:block!important;visibility:visible!important;opacity:1!important;pointer-events:auto!important;width:1920px;height:1080px;break-after:page;page-break-after:always}.slide:last-child{break-after:auto;page-break-after:auto}.deck-controls{display:none!important} }
+    @media (prefers-reduced-motion:reduce) { *,*::before,*::after{animation-duration:.01ms!important;transition-duration:.2s!important} }
+
+    /* === SLIDE DESIGN === */
+    .slide { color:var(--paper); font-family:var(--sans); background:radial-gradient(circle at 78% 45%,rgba(87,230,209,.08),transparent 28%),linear-gradient(145deg,#061019,#071620); }
+    .slide::before { content:""; position:absolute; inset:0; background-image:linear-gradient(rgba(87,230,209,.055) 1px,transparent 1px),linear-gradient(90deg,rgba(87,230,209,.055) 1px,transparent 1px); background-size:48px 48px; mask-image:linear-gradient(90deg,transparent,#000 46%,#000); }
+    .frame { position:absolute; inset:66px; border:1px solid rgba(87,230,209,.12); }
+    .chrome { position:absolute; left:92px; right:92px; top:72px; display:flex; justify-content:space-between; padding-bottom:22px; border-bottom:1px solid var(--line); color:var(--muted); font:600 17px var(--mono); letter-spacing:.08em; }
+    .chrome b { color:var(--cyan); }
+    .hero { position:absolute; left:104px; top:220px; width:1030px; }
+    .hero-label { color:var(--cyan); font:700 20px var(--mono); letter-spacing:.12em; }
+    h1 { margin:34px 0 0; font-size:100px; line-height:1.08; letter-spacing:-.055em; }
+    h1 span { color:var(--orange); }
+    .subtitle { margin:52px 0 0; padding-left:28px; border-left:5px solid var(--orange); color:#b5c9ce; font-size:27px; }
+    .trace-panel { position:absolute; right:105px; top:190px; width:620px; height:650px; border:1px solid rgba(87,230,209,.28); background:rgba(2,9,14,.64); box-shadow:0 0 80px rgba(87,230,209,.07); }
+    .trace-panel::before { content:"DEPLOYMENT TRACE"; position:absolute; left:30px; top:28px; color:var(--cyan); font:600 16px var(--mono); letter-spacing:.14em; }
+    .trace-line { position:absolute; left:94px; top:126px; width:3px; height:392px; background:linear-gradient(var(--cyan),var(--orange)); transform-origin:top; animation:grow .95s .12s var(--ease) both; }
+    .node { position:absolute; left:74px; display:grid; grid-template-columns:42px 1fr; align-items:center; gap:22px; width:470px; font:700 24px var(--mono); }
+    .node i { width:42px; height:42px; border:4px solid #07131b; border-radius:50%; background:var(--cyan); box-shadow:0 0 0 2px var(--cyan); }
+    .node small { display:block; margin-top:7px; color:var(--muted); font:400 14px var(--mono); }
+    .n1{top:106px}.n2{top:238px}.n3{top:370px}.n4{top:502px}.n4 i{background:var(--orange);box-shadow:0 0 0 2px var(--orange)}.n4 span{color:var(--orange)}
+    .status { position:absolute; right:108px; bottom:86px; color:var(--cyan); font:600 16px var(--mono); }
+    .reveal { opacity:0; transform:translateY(32px); animation:reveal .7s var(--delay,.05s) var(--ease) forwards; }
+    @keyframes reveal { to{opacity:1;transform:translateY(0)} }
+    @keyframes grow { from{transform:scaleY(0)} to{transform:scaleY(1)} }
+  </style>
+</head>
+<body>
+  <div class="deck-viewport"><main class="deck-stage" id="deckStage">
+    <section class="slide active visible">
+      <div class="frame"></div>
+      <div class="chrome"><b>TZ / AI LAB</b><span>CODEX × CLOUDFLARE · 10 MIN</span></div>
+      <div class="hero reveal">
+        <div class="hero-label">AI ERA / PERSONAL WEB</div>
+        <h1>如何快速打造并上线<br><span>一个个人网站</span></h1>
+        <p class="subtitle">从一个想法，到一个真正可访问的 URL</p>
+      </div>
+      <div class="trace-panel reveal" style="--delay:.14s">
+        <div class="trace-line"></div>
+        <div class="node n1"><i></i><span>IDEA<small>说清楚你要做什么</small></span></div>
+        <div class="node n2"><i></i><span>AI / CODEX<small>生成、运行与修改</small></span></div>
+        <div class="node n3"><i></i><span>CLOUDFLARE<small>域名、HTTPS 与 CDN</small></span></div>
+        <div class="node n4"><i></i><span>LIVE URL<small>真正可访问</small></span></div>
+      </div>
+      <div class="status">STATUS / READY TO SHIP</div>
+    </section>
+  </main></div>
+  <script>
+    const stage=document.getElementById('deckStage');
+    const scale=()=>{const f=Math.min(innerWidth/1920,innerHeight/1080);stage.style.transform=`translate(${(innerWidth-1920*f)/2}px,${(innerHeight-1080*f)/2}px) scale(${f})`};
+    scale();addEventListener('resize',scale);
+  </script>
+</body>
+</html>

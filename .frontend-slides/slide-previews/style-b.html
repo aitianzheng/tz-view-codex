@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AI 时代｜快速打造并上线个人网站</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@500;800;900&amp;family=IBM+Plex+Mono:wght@500;700&amp;family=Noto+Sans+SC:wght@500;700;900&amp;display=swap" rel="stylesheet">
+  <style>
+    /* === THEME === */
+    :root { --stage-bg:#070707; --slide-bg:#111111; --ink:#111111; --cream:#f0ece5; --muted:#888880; --fire:#e85d26; --display:"Barlow","Noto Sans SC",sans-serif; --mono:"IBM Plex Mono",monospace; --cjk:"Noto Sans SC",sans-serif; --ease:cubic-bezier(.16,1,.3,1); }
+    * { box-sizing:border-box; }
+
+    /* ===========================================
+       FIXED 16:9 STAGE: MANDATORY BASE STYLES
+       Include this ENTIRE file in every presentation.
+       Slides are authored at 1920×1080 and scaled as a whole.
+       =========================================== */
+    html, body { width:100%; height:100%; margin:0; overflow:hidden; background:var(--stage-bg,#000); }
+    .deck-viewport { position:fixed; inset:0; overflow:hidden; background:var(--stage-bg,#000); }
+    .deck-stage { position:absolute; left:0; top:0; width:1920px; height:1080px; overflow:hidden; transform-origin:0 0; background:var(--slide-bg,#fff); }
+    .slide { position:absolute; inset:0; width:1920px; height:1080px; overflow:hidden; display:block; visibility:hidden; opacity:0; pointer-events:none; background:var(--slide-bg,#fff); }
+    .slide.active, .slide.visible { visibility:visible; opacity:1; pointer-events:auto; z-index:1; }
+    img, video, canvas, svg { max-width:100%; max-height:100%; }
+    .deck-controls { position:fixed; left:50%; bottom:22px; transform:translateX(-50%); z-index:1000; }
+    @media print { html,body{width:1920px;height:auto;overflow:visible;background:#fff}.deck-viewport{position:static;overflow:visible;background:#fff}.deck-stage{position:static;width:auto;height:auto;transform:none!important;background:none}.slide{position:relative;display:block!important;visibility:visible!important;opacity:1!important;pointer-events:auto!important;width:1920px;height:1080px;break-after:page;page-break-after:always}.slide:last-child{break-after:auto;page-break-after:auto}.deck-controls{display:none!important} }
+    @media (prefers-reduced-motion:reduce) { *,*::before,*::after{animation-duration:.01ms!important;transition-duration:.2s!important} }
+
+    /* === SLIDE DESIGN === */
+    .slide { color:var(--cream); font-family:var(--display); background:#111; }
+    .orange-rail { position:absolute; left:0; top:0; bottom:0; width:330px; background:var(--fire); transform-origin:left; animation:rail .75s var(--ease) both; }
+    .rail-number { position:absolute; left:52px; bottom:48px; color:var(--ink); font:900 234px/.75 var(--display); }
+    .rail-label { position:absolute; left:58px; top:68px; color:var(--ink); font:700 20px var(--mono); writing-mode:vertical-rl; letter-spacing:.12em; }
+    .chrome { position:absolute; left:394px; right:68px; top:62px; display:flex; justify-content:space-between; padding-bottom:26px; border-bottom:1px solid #282826; color:var(--muted); font:500 17px var(--mono); }
+    .chrome b { color:var(--fire); }
+    .headline { position:absolute; left:392px; top:202px; width:1435px; }
+    .headline small { color:var(--fire); font:700 28px var(--mono); letter-spacing:.12em; }
+    h1 { margin:30px 0 0; font:900 108px/1.02 var(--cjk); letter-spacing:-.055em; }
+    .giant { position:absolute; right:54px; bottom:80px; margin:0; color:transparent; -webkit-text-stroke:2px var(--fire); font:900 215px/.8 var(--display); letter-spacing:-.07em; }
+    .subtitle { position:absolute; left:398px; bottom:106px; width:720px; padding-top:24px; border-top:1px solid #282826; color:var(--muted); font:500 24px/1.55 var(--cjk); }
+    .trace { position:absolute; left:1120px; top:570px; display:flex; align-items:center; gap:14px; color:var(--cream); font:700 15px var(--mono); }
+    .trace i { width:62px; height:2px; background:var(--fire); }
+    .reveal { opacity:0; transform:translateY(34px); animation:reveal .72s var(--delay,.08s) var(--ease) forwards; }
+    @keyframes reveal { to{opacity:1;transform:translateY(0)} }
+    @keyframes rail { from{transform:scaleX(0)} to{transform:scaleX(1)} }
+  </style>
+</head>
+<body>
+  <div class="deck-viewport"><main class="deck-stage" id="deckStage">
+    <section class="slide active visible">
+      <div class="orange-rail"><div class="rail-label">10 MIN SHARE · 2026</div><div class="rail-number">01</div></div>
+      <div class="chrome"><b>AI × CODEX × CLOUDFLARE</b><span>FROM IDEA TO A LIVE URL</span></div>
+      <div class="headline reveal">
+        <small>AI ERA / 个人网站</small>
+        <h1>如何快速打造并上线<br>一个个人网站</h1>
+      </div>
+      <div class="trace reveal" style="--delay:.26s"><span>IDEA</span><i></i><span>CODEX</span><i></i><span>LIVE</span></div>
+      <p class="subtitle reveal" style="--delay:.34s">从一个想法，到一个真正可访问的 URL</p>
+      <p class="giant reveal" style="--delay:.42s">URL</p>
+    </section>
+  </main></div>
+  <script>
+    const stage=document.getElementById('deckStage');
+    const scale=()=>{const f=Math.min(innerWidth/1920,innerHeight/1080);stage.style.transform=`translate(${(innerWidth-1920*f)/2}px,${(innerHeight-1080*f)/2}px) scale(${f})`};
+    scale();addEventListener('resize',scale);
+  </script>
+</body>
+</html>
