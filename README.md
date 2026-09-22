@@ -81,3 +81,7 @@ NEXT_PUBLIC_SITE_URL=https://tz-view.com npm run build
 `NEXT_PUBLIC_SITE_URL` 用于设置页面元信息中的站点公开地址。复用项目时，请替换为自己的域名，同时检查 `app/layout.tsx` 的默认地址、`.openai/hosting.json` 中的托管配置以及个人素材。
 
 不要提交托管平台凭据、`.env` 文件、`node_modules/`、`dist/` 或 `.wrangler/` 等本地产物。发布网站应作为单独操作，在本地效果确认后执行。
+
+## 许可证
+
+本项目采用 [MIT 许可证](LICENSE)。Copyright (c) 2026 天正。
